@@ -25,7 +25,7 @@ defmodule KafkaEx.NetworkClient do
 
       err ->
         Logger.log(
-          :error,
+          :warning,
           "Could not connect to broker #{inspect(host)}:#{inspect(port)} because of error #{inspect(err)}"
         )
 
@@ -40,7 +40,7 @@ defmodule KafkaEx.NetworkClient do
   @impl true
   def send_async_request(%{socket: nil} = broker, _data) do
     Logger.log(
-      :error,
+      :warning,
       "Asynchronously sending data to broker #{inspect(broker.host)}:#{inspect(broker.port)} failed: socket is nil"
     )
 
@@ -56,7 +56,7 @@ defmodule KafkaEx.NetworkClient do
 
       {_, reason} ->
         Logger.log(
-          :error,
+          :warning,
           "Asynchronously sending data to broker #{inspect(broker.host)}:#{inspect(broker.port)} failed with #{inspect(reason)}"
         )
 
@@ -79,7 +79,7 @@ defmodule KafkaEx.NetworkClient do
 
             {:error, reason} ->
               Logger.log(
-                :error,
+                :warning,
                 "Receiving data from broker #{inspect(broker.host)}:#{inspect(broker.port)} failed with #{inspect(reason)}"
               )
 
@@ -90,7 +90,7 @@ defmodule KafkaEx.NetworkClient do
 
         {_, reason} ->
           Logger.log(
-            :error,
+            :warning,
             "Sending data to broker #{inspect(broker.host)}:#{inspect(broker.port)} failed with #{inspect(reason)}"
           )
 
